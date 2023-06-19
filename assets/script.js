@@ -1,6 +1,7 @@
 const carouselImagesContainer = document.querySelector(".carousel-images");
 const carouselTextContent = document.querySelector(".carousel-text p");
-const bullets = document.querySelectorAll(".bullet");
+const carouselNav = document.querySelector(".carousel-navigation");
+const bulletPointsContainer = document.querySelector(".bullet-points");
 
 const carouselData = [
   {
@@ -26,6 +27,7 @@ const carouselData = [
 ];
 
 let currentIndex = 0;
+let bullets = [];
 
 // Insertion des images dans le carousel
 for (const data of carouselData) {
@@ -38,6 +40,16 @@ for (const data of carouselData) {
 const carouselImages = document.querySelectorAll(".carousel-images img");
 const prevButton = document.querySelector(".prev-arrow");
 const nextButton = document.querySelector(".next-arrow");
+
+// Crée les bullet points
+function createBulletPoints() {
+  for (let i = 0; i < carouselData.length; i++) {
+    const bullet = document.createElement("div");
+    bullet.className = "bullet";
+    bulletPointsContainer.appendChild(bullet);
+    bullets.push(bullet);
+  }
+}
 
 // Affiche l'image, le texte et met à jour le bullet point
 function showSlide(index) {
@@ -72,9 +84,10 @@ function showPreviousSlide() {
   showSlide(prevIndex);
 }
 
-// Gestion des événements des boutons
+// Gestion des événements des flèches
 prevButton.addEventListener("click", showPreviousSlide);
 nextButton.addEventListener("click", showNextSlide);
 
-// Affiche la première image au chargement de la page
+// Crée les bullet points et affiche la première image au chargement de la page
+createBulletPoints();
 showSlide(currentIndex);
